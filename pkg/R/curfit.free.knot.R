@@ -1,4 +1,8 @@
-curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3, prior = NULL, fixed = NULL, ...) {
+curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3,
+                             prior = NULL, fixed = NULL, ...) {
+##
+## 1.  Define internal functions
+##  
   penalty.opt <- function(kn, x, y, k, sigma0, eps, fixed = NULL, ...) {
     kn <- sort(c(kn, fixed))
     sp <- curfit(x, y, method = "ls", knots = kn, ...)
@@ -39,6 +43,9 @@ curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3, prior 
     }
     d.sp + p * d.pen
   }
+##
+## 2.  
+##  
   m <- length(x)
   a <- min(x)
   b <- max(x)
@@ -107,6 +114,9 @@ curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3, prior 
     summ <- data.frame(g = seq.g, sigma = sigma, T = T)
     names(sp1) <- seq.g
   }
+##
+## 3.
+##   
   if(is.null(prior)) {
     ret <- if(index > 0) sp1[[index]] else sp1[[length(sp1)]]
     ret <- c(ret, list(fits = sp1))

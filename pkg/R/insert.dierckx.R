@@ -3,8 +3,12 @@ insert <- function(object, ...) {
 }
 
 insert.dierckx <- function(object, at, ...) {
-  if(missing(at) || !length(at))
-    stop("no knots to insert")
+  if(missing(at) || !length(at)){    
+#    stop("no knots to insert")
+    Knots <- knots(object, interior=FALSE)
+    uKn <- sort(unique(Knots))
+    at <- 0.5*(uKn[-1]+uKn[-length(uKn)]) 
+  }
   m <- length(at)
   iopt <- 0
   nest <- as.integer(object$nest)
@@ -24,6 +28,7 @@ insert.dierckx <- function(object, at, ...) {
     object$n <- sp$nn
     object$knots <- as.double(sp$tt)
     object$coef <- as.double(sp$cc)
+    object$g <- object$g+1
   }
   object$sp <- fitted(object)
   object

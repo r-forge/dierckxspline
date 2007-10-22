@@ -47,24 +47,33 @@ profile.dierckx <- function(fitted, which = 1:g, alpha = 0.01, maxsteps = 10, ..
   prof
 }
 
-confint.dierckx <- function(object, knots = 1:g, level = 0.95, ...) {
+#confint.dierckx <- function(object, knots = 1:g, level = 0.95, ...) {
+confint.dierckx <- function(object, parm = 1:g, level = 0.95, ...) {
   g <- object$g
   message("Waiting for profiling to be done...")
   utils::flush.console()
-  object <- profile(object, knots = knots, alpha = (1 - level)/4)
-  confint(object, knots = knots, level = level, ...)
+#  object <- profile(object, knots = knots, alpha = (1 - level)/4)
+  object <- profile(object, knots = parm, alpha = (1 - level)/4)
+#  confint(object, knots = knots, level = level, ...)
+  confint(object, parm = parm, level = level, ...)
 }
 
-confint.profile.dierckx <- function(object, knots = 1:g, level = 0.95, ...) {
+#confint.profile.dierckx <- function(object, knots = 1:g, level = 0.95, ...) {
+confint.profile.dierckx <- function(object, parm = 1:g,
+                                    level = 0.95, ...) {
   fit <- object$original.fit
   g <- fit$g
   a <- (1 - level)/2
   a <- c(a, 1 - a)
   pct <- paste(round(100 * a, 1), "%")
-  ci <- array(NA, dim = c(length(knots), 3), dimnames = list(knots, c("knots", pct)))
+#  ci <- array(NA, dim = c(length(knots), 3), dimnames = list(knots, c("knots", pct)))
+  ci <- array(NA, dim = c(length(parm), 3), dimnames =
+              list(parm, c("knots", pct)))
   cutoff <- qnorm(a)
-  for(i in seq_along(knots)) {
-    pro <- object[[as.character(knots[i])]]
+#  for(i in seq_along(knots)) {
+  for(i in seq_along(parm)) {
+#    pro <- object[[as.character(knots[i])]]
+    pro <- object[[as.character(parm[i])]]
     if(is.null(pro)) next
     ci.k <- if(all(pro[, "tau"] == 0)) {
       c(NA, NA)
