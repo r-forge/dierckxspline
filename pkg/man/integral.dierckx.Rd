@@ -38,16 +38,20 @@ Science Publications.
 \examples{
 x <- seq(0, 1, 0.1)
 y <- (1 - x)^3
-z <- curfit(x, y, method = "ls", knots = seq(0, 1, 0.2))
+z <- curfit(x, y, knots = seq(0, 1, 0.2))
 
 plot(x, y, type = "p")
 lines(x, fitted(z), col = "blue")
 
-integral(z)
-integrate(function(x) (1 - x)^3, 0, 1)
+(answer <- integrate(function(x) (1 - x)^3, 0, 1))
+#0.25 with absolute error < 2.8e-15
+integral(z)-answer$value
+# 0
 
-integral(z, 0.5, 0.6)
-integrate(function(x) (1 - x)^3, 0.5, 0.6)
+(ans2 <- integrate(function(x) (1 - x)^3, 0.5, 0.6))
+#0.009225 with absolute error < 1.0e-16
+integral(z, 0.5, 0.6)-ans2$value
+# 6e-9
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

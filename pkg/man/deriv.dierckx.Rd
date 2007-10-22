@@ -2,7 +2,7 @@
 \alias{deriv}
 \alias{deriv.dierckx}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Spline Derivation}
+\title{Spline Differentiation}
 \description{
   Evaluates in a number of points x(i),i=1,2,...,m
   the derivative of order nu of a spline s(x) of degree k,given in
@@ -44,9 +44,9 @@ D2 <- deriv(~(1 - x)^3, "x", func = TRUE)(z$x)
 D3 <- numericDeriv(quote((1 - x)^3), "x")
 D4 <- -3 * (1 - z$x)^2
 cbind(D1 = D1,
-      D2 = attr(D2, "gradient")[, 1],
-      D3 = diag(attr(D3, "gradient")),
-      D4 = D4)
+     D2 = attr(D2, "gradient")[, 1],
+     D3 = diag(attr(D3, "gradient")),
+     D4 = D4)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

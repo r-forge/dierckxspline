@@ -2,9 +2,10 @@
 \alias{concon}
 \alias{concon.default}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Curve fitting with splines}
+\title{Curve fitting with convexity constraints}
 \description{
-General curve fitting with splines with convexity constraints. Wrapper for function CONCON.
+  General curve fitting with splines with convexity constraints.
+  Wrapper for the Fortran function CONCON. 
 }
 \usage{
 concon(x, ...)
@@ -77,8 +78,12 @@ concon(x, ...)
   \item{k}{Always 3 (cubic spline)}
   \item{periodic}{Always \code{FALSE}}
   \item{routine}{Always 'concon.default'}
-  \item{xlab}{The x-label determined from \code{deparse(substitute(x)).}
-  \item{ylab}{The y-label determined from \code{deparse(substitute(y)).}
+  \item{xlab}{
+    The x-label determined from \code{deparse(substitute(x)).}
+  }
+  \item{ylab}{
+    The y-label determined from \code{deparse(substitute(y)).}
+  }
 }
 \references{
 Dierckx, P. (1991) \emph{Curve and Surface Fitting with Splines}, Oxford
@@ -91,35 +96,30 @@ data(moisture)
 f1 <- with(moisture, concon(x, y, w, v, s = 0.2))
 f2 <- update(f1, s = 0.04)
 f3 <- update(f1, s = 0.0002)
-g1 <- with(moisture, curfit(x, y, w, method = "ls", knots = knots(f1)))
-g2 <- update(g1, knots = knots(f2))
-g3 <- update(g1, knots = knots(f3))
+g1 <- with(moisture, curfit(x, y, w, knots = knots(f1, interior=FALSE)))
+#must include end knots, via interior = FALSE 
+g2 <- update(g1, knots = knots(f2, FALSE))
+g3 <- update(g1, knots = knots(f3, FALSE))
 
 newx <- with(moisture, seq(min(x), max(x), length = 100))
 method <- c("Convexity Constrained", "Unconstrained Least Squares")
 group <- c("0 interior knots", "1 interior knot", "3 interior knots")
 out <- data.frame(x = rep(newx, times = 6),
-                  y = c(predict(f1, newx),
-                    predict(f2, newx),
-                    predict(f3, newx),
-                    predict(g1, newx),
-                    predict(g2, newx),
-                    predict(g3, newx)),
-                  group = rep(group, each = 100, times = 2),
-                  method = rep(method, each = 3 * 100))
+         y = c(predict(f1, newx), predict(f2, newx),
+               predict(f3, newx), predict(g1, newx),
+               predict(g2, newx), predict(g3, newx)),
+         group = rep(group, each = 100, times = 2),
+         method = rep(method, each = 3 * 100))
 
 library(lattice)
-xyplot(y ~ x | method, out, groups = group,
-       panel = function(...) {
+xyplot(y ~ x | method, out, groups = group, panel = function(...) {
          panel.superpose(...)
          panel.xyplot(moisture$x, moisture$y,
                       col = "#800000", pch = 16, cex = 1.2)
        },
-       xlim = c(-1, 11), xlab = "", ylab = "",
-       layout = c(1, 2), as.table = TRUE,
-       scales = list(cex = 1.2),
-       par.strip.text = list(cex = 1.5),
-       type = "l", lwd = 3,
+       xlim = c(-1, 11), xlab = "", ylab = "", layout = c(1, 2),
+       as.table = TRUE, scales = list(cex = 1.2), 
+       par.strip.text = list(cex = 1.5), type = "l", lwd = 3,
        key = list(space = "top", cex = 1.2, columns = 3,
          text = list(levels(out$group)),
          lines = list(lwd = 3, col = trellis.par.get("superpose.line")$col[1:3])))
