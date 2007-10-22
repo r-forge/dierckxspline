@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HEAD></HEAD><HTML><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package DierckxSpline:  Contents">
+<param name="Local" value="00Index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package DierckxSpline:  R objects">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="concon">
+<param name="Local" value="concon.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="concon.default">
+<param name="Local" value="concon.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="curfit">
+<param name="Local" value="curfit.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="curfit.default">
+<param name="Local" value="curfit.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="deriv">
+<param name="Local" value="deriv.dierckx.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="deriv.dierckx">
+<param name="Local" value="deriv.dierckx.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="insert">
+<param name="Local" value="insert.dierckx.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="insert.dierckx">
+<param name="Local" value="insert.dierckx.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="integral">
+<param name="Local" value="integral.dierckx.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="integral.dierckx">
+<param name="Local" value="integral.dierckx.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="percur">
+<param name="Local" value="curfit.html">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package DierckxSpline:  Titles">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Curve fitting with splines">
+<param name="Local" value="curfit.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Spline Derivation">
+<param name="Local" value="deriv.dierckx.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Spline Integration">
+<param name="Local" value="integral.dierckx.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Spline Knot Insertion">
+<param name="Local" value="insert.dierckx.html">
+</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

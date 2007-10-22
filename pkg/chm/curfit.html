@@ -1,0 +1,251 @@
+<html><head><title>Curve fitting with splines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>curfit(DierckxSpline)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   curfit">
+<param name="keyword" value="R:   percur">
+<param name="keyword" value="R:   curfit.default">
+<param name="keyword" value=" Curve fitting with splines">
+</object>
+
+
+<h2>Curve fitting with splines</h2>
+
+
+<h3>Description</h3>
+
+<p>
+General curve fitting with splines. Wrapper for function CURFIT.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+curfit(x, ...)
+percur(x, ...)
+## Default S3 method:
+curfit(x, y = NULL, w = NULL, s,
+       knots = NULL, n = 0, from = min(x), to = max(x),
+       method = c("ls", "ss"), k = 3, periodic = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A <code>data.frame</code>, <code>matrix</code>, or <code>numeric</code>
+vector. See details.</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+Optional numeric vector. See details.</td></tr>
+<tr valign="top"><td><code>w</code></td>
+<td>
+Optional vector of weights</td></tr>
+<tr valign="top"><td><code>s</code></td>
+<td>
+Smoothing parameter</td></tr>
+<tr valign="top"><td><code>knots</code></td>
+<td>
+Optional vector of knots. See details.</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+The number of knots. Required only for method "ls".</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+Lower bound from which to fit spline.</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+Upper bound to which to fit spline.</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+Either "ss" for smoothing spline or "ls" for least
+squares spline. Partial matching is used to determine which method
+is supplied.</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+Degree of the spline. Valid options for <code>k</code> are 1 to 5,
+inclusively.</td></tr>
+<tr valign="top"><td><code>periodic</code></td>
+<td>
+logical; if <code>TRUE</code> then <code>s(a) == s(b)</code></td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional arguments used only in
+<code>update.curfit</code>. Otherwise, ignored.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+As with <code><a onclick="findlink('stats', 'smooth.spline.html')" style="text-decoration: underline; color: blue; cursor: hand">smooth.spline</a></code>, the <code>x</code> vector should
+contain at least four distinct values. <EM>Distinct</EM> here means
+``distinct after rounding to 6 significant digits'', i.e., <code>x</code>
+will be transformed to <code>unique(sort(signif(x, 6)))</code>, and <code>y</code>
+and <code>w</code> are pooled accordingly.
+</p>
+<p>
+For the default method, arguments <code>x</code> and <code>y</code> are supplied
+to <code><a onclick="findlink('grDevices', 'xy.coords.html')" style="text-decoration: underline; color: blue; cursor: hand">xy.coords</a></code> to determine abscissa and ordinate
+values. The actual function used is <code>DierckxSpline:::xyw.coords</code>
+which is not exported in the <code>NAMESPACE</code>.
+</p>
+<p>
+<code>curfit</code> determines a smooth spline approximation <code>s(x)</code>
+of degree <code>k</code>. See chapters 1 and 3 in the reference for definition of
+symbols.
+</p>
+<p>
+When supplying knots, the first <code>k+1</code> values should be
+<code>min(x)</code> and the last <code>n+k-1</code> value should be
+<code>max(x)</code>. See below for examples.
+</p>
+<p>
+<code>percur</code> is equivalent to calling <code>curfit(..., periodic=TRUE)</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Sundar Dorai-Raj
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Dierckx, P. (1991) <EM>Curve and Surface Fitting with Splines</EM>, Oxford
+Science Publications.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="concon.html">concon</a></code>, <code><a onclick="findlink('stats', 'spline.html')" style="text-decoration: underline; color: blue; cursor: hand">spline</a></code>, <code><a onclick="findlink('stats', 'smooth.spline.html')" style="text-decoration: underline; color: blue; cursor: hand">smooth.spline</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+x &lt;- 0:24
+y &lt;- c(1.0,1.0,1.4,1.1,1.0,1.0,4.0,9.0,13.0,
+       13.4,12.8,13.1,13.0,14.0,13.0,13.5,
+       10.0,2.0,3.0,2.5,2.5,2.5,3.0,4.0,3.5)
+
+z &lt;- list()
+for(k in c(3, 5, 2)) {
+  z1 &lt;- curfit(x, y, method = "ss", s = 1000, k = k)
+  z2 &lt;- update(z1, s = 60)
+  z3 &lt;- update(z2, s = 10)
+  z4 &lt;- update(z3, s = 30)
+  z5 &lt;- curfit(x, y, method = "ss", s = 30, k = k)
+  z6 &lt;- update(z5, s = 0)
+  knots &lt;- c(rep(0, k + 1), seq(3, 21, 3), rep(24, k + 1))
+  z7 &lt;- curfit(x, y, method = "ls", s = 30, knots = knots, k = k)
+  z[[as.character(k)]] &lt;- list(z1, z2, z3, z4, z5, z6, z7)
+}
+
+p &lt;- unlist(z, recursive = FALSE)
+n &lt;- sapply(lapply(p, knots), length)
+s &lt;- sapply(p, "[[", "s")
+i &lt;- sapply(p, "[[", "iopt")
+m &lt;- ifelse(i == -1, "ls", ifelse(i == 0, "ss", "ss1"))
+k &lt;- sprintf("k = %d", sapply(p, "[[", "k"))
+g &lt;- sprintf("%s(s=%d)", m, s, i)
+sp &lt;- data.frame(x = rep(x, times = length(p)),
+                 y = rep(y, times = length(p)),
+                 z = unlist(lapply(p, fitted)),
+                 k = factor(rep(k, each = length(x))),
+                 g = rep(g, each = length(x)))
+
+library(lattice)
+xyplot(z ~ x | k, data = sp, groups = g,
+       panel = function(x, y, subscripts, groups, obs, ...) {
+         panel.superpose(x, y, subscripts, groups, lwd = 3, type = "l", ...)
+         x &lt;- unique(x)
+         y &lt;- unique(obs)
+         panel.xyplot(x, obs, pch = 16, cex = 1.2, col = "darkblue")
+       },
+       auto.key = list(space = "right", points = FALSE, lines = TRUE),
+       obs = sp$y)
+
+## periodic spline
+set.seed(42)
+n &lt;- 100
+r &lt;- 1:n
+x &lt;- 0.01 * (r - 1)
+e &lt;- rnorm(n, 0, 0.1)
+w &lt;- rep(1/sd(e), n + 1)
+y &lt;- cos(2 * pi * x) + 0.25 * sin(8 * pi * x) + e
+x &lt;- c(x, 1)
+y &lt;- c(y, y[1])
+kn &lt;- seq(0.01, 0.99, length = 12)
+f1 &lt;- percur(x, y, w = w, method = "ss", s = 90, k = 5)
+
+library(lattice)
+top &lt;- xyplot(y ~ x,
+              panel = function(x, y, ...) {
+                panel.abline(v = knots(f1), lty = 2, lwd = 3, col = "gray")
+                panel.xyplot(x, y, pch = 16, col = "#800000", cex = 1.2)
+                panel.xyplot(x, fitted(f1), type = "l", lwd = 3, col = "#000080")
+              },
+              par.settings = list(layout.widths = list(left.padding = 0, right.padding = 0)),
+              scales = list(cex = 1.2),
+              xlab = "", ylab = "")
+newx &lt;- seq(-2, 2, 0.01)
+newy &lt;- predict(f1, newx)
+bot &lt;- xyplot(newy ~ newx, type = "l",
+              panel = function(...) {
+                panel.abline(v = -2:2, lty = 2, col = "salmon", lwd = 3)
+                panel.xyplot(...)
+              },
+              col = "#000080", lwd = 3,
+              par.settings = list(layout.widths = list(left.padding = 0, right.padding = 0)),
+              scales = list(cex = 1.2),
+              xlab = "", ylab = "")
+print(top, c(0, 0.2, 1, 1))
+print(bot, c(0.008, 0, 0.992, 0.25), newpage = FALSE)
+
+## example borrowed from ?smooth.spline
+plot(cars$speed, cars$dist,
+     main = "data(cars)  &amp;  smoothing splines",
+     xlab = "SPEED", ylab = "DISTANCE",
+     cex.lab = 1.2, cex.axis = 1.2,
+     cex.main = 2, cex = 1.5, col = "blue")
+## This example has duplicate points, so avoid cv=TRUE
+cars.spl.0 &lt;- smooth.spline(cars$speed, cars$dist)
+cars.spl.1 &lt;- smooth.spline(cars$speed, cars$dist, df = 10)
+cars.spl.2 &lt;- curfit(cars$speed, cars$dist, s = 5e3)
+newx &lt;- seq(min(cars$speed), max(cars$speed), len = 200)
+lines(predict(cars.spl.0, newx), col = "blue", lwd = 3, lty = 2)
+lines(predict(cars.spl.1, newx), lty=2, col = "red", lwd = 3)
+lines(newx, predict(cars.spl.2, newx), lty=2, col = "orange", lwd = 3)
+legend(5, 120, c(paste("smooth.spline( * , df = ", round(cars.spl.1$df, 1), ")", sep = ""),
+                 "smooth.spline( * , df = 10)", "curfit( * , s = 5e3)"),
+       col = c("blue", "red", "orange"), lty = 2, lwd = 3,
+       bg = 'bisque', cex = 1.5)
+
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>DierckxSpline</em> version 1.0-2 <a href="00Index.html">Index]</a></div>
+
+</body></html>
