@@ -38,7 +38,7 @@ spli <- curfit(xi, yi, s=10)
 plot(xi, yi) 
 lines(spli)
 
-spli2 <- insert.dierckx(spli)
+spli2 <- insert(spli)
 lines(spli2, col="red")
 kni <- knots(spli, FALSE) # 1 1 1 1 10 10 10 10 
 all.equal(c(kni[1:4], 5.5, kni[5:8]), knots(spli2, FALSE))

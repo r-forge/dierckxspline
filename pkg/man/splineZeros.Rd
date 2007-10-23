@@ -46,10 +46,7 @@ Dierckx, P. (1993) \emph{Curve and Surface Fitting with Splines}, Oxford
 Science Publications.
 }
 \author{Spencer Graves}
-\seealso{\code{\link{curfit}}}
-\seealso{\code{\link{insert.dierckx}}}
-\seealso{\code{\link{predict.dierckx}}}
-\seealso{\code{\link[stats]{uniroot}}}
+\seealso{\code{\link{curfit}},\code{\link{insert.dierckx}},\code{\link{predict.dierckx}},\code{\link[stats]{uniroot}}}
 \examples{
 xi <- 1:10
 yi <- sin(xi) 

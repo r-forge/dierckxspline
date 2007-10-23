@@ -7,7 +7,7 @@
   Evaluate the spline for a desired set of x values.  
 }
 \usage{
-  predict.dierckx(object, newdata, ...)
+  \method{predict}{dierckx}(object, newdata, ...)
 }
 \arguments{
   \item{object}{
@@ -17,6 +17,7 @@
     an optional numeric vector at which 'dierckx' spline predictions are
     desired.  
   }
+  \item{\dots}{Ignored.}
 }
 \details{
   if newdata is provided, evaluate the spline at newdata and return the
