@@ -92,13 +92,14 @@ lines(cP[, 1], cP[, 2], lty="dotted")
 fig1.2a.dierckx <- fd2dierckx(fig1.2a.fda)
 cP. <- controlPolygon(fig1.2a.dierckx)
 all.equal(cP, cP.)
+# mean rel difference = 2e-7
 
 # Figure 1.2:  Knot insertion 
-fig1.2b <- insert.dierckx(fig1.2a.dierckx)
+fig1.2b <- insert(fig1.2a.dierckx)
 cP2 <- controlPolygon(fig1.2b)
 lines(cP2[, 1], cP2[, 2], lty="dashed")
 
-fig1.2c <- insert.dierckx(fig1.2b, c(2.5, 3.5, 4.75, 6.25))
+fig1.2c <- insert(fig1.2b, c(2.5, 3.5, 4.75, 6.25))
 cP3 <- controlPolygon(fig1.2c)
 lines(cP3[, 1], cP3[, 2])
 

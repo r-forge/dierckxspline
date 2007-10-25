@@ -5,7 +5,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Curve fitting with splines}
 \description{
-  General curve fitting with splines.  Wrapper for function CURFIT.
+  General curve fitting with splines.  Wrapper for Fortran function CURFIT.
 }
 \usage{
 curfit(x, ...)
@@ -273,11 +273,12 @@ cars.spl.1 <- smooth.spline(cars$speed, cars$dist, df = 10)
 cars.spl.2 <- curfit(cars$speed, cars$dist, s = 5e3)
 newx <- seq(min(cars$speed), max(cars$speed), len = 200)
 lines(predict(cars.spl.0, newx), col = "blue", lwd = 3, lty = 2)
-lines(predict(cars.spl.1, newx), lty=2, col = "red", lwd = 3)
-lines(newx, predict(cars.spl.2, newx), lty=2, col = "orange", lwd = 3)
-legend(5, 120, c(paste("smooth.spline( * , df = ", round(cars.spl.1$df, 1), ")", sep = ""),
+lines(predict(cars.spl.1, newx), lty="dashed", col = "red", lwd = 3)
+lines(newx, predict(cars.spl.2, newx), lty="dotted", lwd = 3)
+legend(5, 120, c(paste("smooth.spline( * , df = ", round(cars.spl.0$df, 1), ")", sep = ""),
                  "smooth.spline( * , df = 10)", "curfit( * , s = 5e3)"),
-       col = c("blue", "red", "orange"), lty = 2, lwd = 3,
+       col = c("blue", "red", "black"),
+       lty = c("solid", "dashed", "dotted"), lwd = 3,
        bg = 'bisque', cex = 1.5)
 
 }
