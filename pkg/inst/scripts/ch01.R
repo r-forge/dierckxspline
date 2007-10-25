@@ -103,7 +103,7 @@ fig1.2c <- insert(fig1.2b, c(2.5, 3.5, 4.75, 6.25))
 cP3 <- controlPolygon(fig1.2c)
 lines(cP3[, 1], cP3[, 2])
 
-abline(v=knots(fig1.2b))
+abline(v=knots(fig1.2b), lty="dotted", col="light blue")
 knots(fig1.2b)
 #[1] 1.0 2.0 3.0 4.0 5.5 7.0 7.5 8.0 9.0
 
@@ -111,5 +111,5 @@ knots(fig1.2b)
 # One zero between 3 and 4
 # and another between 4 and 5.5
 
-splineZeros(fig1.2a.dierckx)
-
+(sZ <- splineZeros(fig1.2a.dierckx))
+abline(v=sZ[, "root"], col="red", lty="dashed")
