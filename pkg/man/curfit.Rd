@@ -40,7 +40,7 @@ percur(x, ...)
 }
 \details{
   \code{curfit} determines a spline approximation \code{s(x)} of degree
-  \code{k} (order k+1).  See Dierckx (1993, ch. 1 and 3) for definition
+  \code{k} (order = k+1).  See Dierckx (1993, ch. 1 and 3) for definition
   of symbols.
 
   \code{curfit} uses two alternative methods:  least squares an
