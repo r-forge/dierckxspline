@@ -7,5 +7,6 @@ Author: Sundar Dorai-Raj
 Maintainer: Sundar Dorai-Raj <sundar.dorai-raj@pdf.com>
 Description: This package provides a wrapper to the FITPACK routines written by Paul Dierckx. The original Fortran is available from http://www.netlib.org/dierckx
 License: GPL
-Depends: R (>= 2.4.0), stats, lattice, fda, splines
+Depends: R (>= 2.4.0), stats, lattice 
+Suggests: fda, splines
 Packaged: Tue Aug 28 06:13:43 2007; spencerg

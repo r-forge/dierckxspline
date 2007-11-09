@@ -31,7 +31,11 @@ dierckx2fd <- function(object){
   nOrder <- k+1
   breaks <- Knots[nOrder:(nKnots-k)]
 #
-  xlab <- object$xlab 
+  xlab <- object$xlab
+  if(!require(fda))
+    stop("library(fda) required for function 'dierckx2fd'",
+         ";  please install.") 
+# 
   B.basis <- create.bspline.basis(rangeval=rngval, norder=nOrder,
                                 breaks=breaks, names=xlab)
 ##

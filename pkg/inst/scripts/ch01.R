@@ -29,7 +29,8 @@ Bspline11135 <- bs(fig1.1x, knots=c(1,1,1,3,5))
 matplot(fig1.1x, cbind(a=Bspline12345[, 4], b=Bspline11135[, 4]),
         type='l')
 
-# Using the 'fda' package 
+# Using the 'fda' package
+library(fda)
 fig1.1a.fda.basis <- create.bspline.basis(c(1, 5), breaks=1:5)
 plot(fig1.1a.fda.basis)
 # We want the middle of 7 

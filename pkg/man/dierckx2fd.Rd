@@ -103,6 +103,7 @@ y <- c(1.0,1.0,1.4,1.1,1.0,1.0,4.0,9.0,13.0,
        10.0,2.0,3.0,2.5,2.5,2.5,3.0,4.0,3.5)
 curfit.xy <- curfit(x, y, s=0)
 
+library(fda)
 curfit.fd <- dierckx2fd(curfit.xy)
 plot(curfit.fd) # as an 'fd' object 
 points(x, y) # Curve goes through the points.  
