@@ -1,6 +1,7 @@
 panel.dierckx <- function(x, y, newx, newy,
-                          knots = NULL, knots.y = NULL, lty = 2,
-                          knot.cex = 1.5, knot.col = "red", knot.fill = "lightgray", ...) {
+                      knots = NULL, knots.y = NULL, lty = 2,
+                      knot.cex = 1.5, knot.col = "red",
+                      knot.fill = "lightgray", ...) {
   if(!is.null(knots) && !is.null(knots.y)) {
     ylim <- current.panel.limits()$ylim
     knots.y <- pmin(knots.y, ylim[2])
@@ -14,15 +15,21 @@ panel.dierckx <- function(x, y, newx, newy,
 }
 
 
-xyplot.dierckx <- function(x, data, panel = "panel.dierckx", show.knots = FALSE, ...) {
+xyplot.dierckx <- function(x, data, panel = "panel.dierckx",
+                           show.knots = FALSE, ...) {
   if(!missing(data)) 
     warning("explicit 'data' specification ignored")
   dots <- list(...)
   data <- data.frame(x = x$x, y = x$y)
   dots$x <- y ~ x
   dots$data <- data
-  dots$newx <- seq(min(x$x), max(x$x), len = 200)
-  dots$newy <- predict(x, newdata = dots$newx)
+#  dots$newx <- seq(min(x$x), max(x$x), len = 201)
+# sometimes dots$newx gets lost;  I don't know why.  sg 2008.01.12  
+#  dots$newy <- predict(x, newdata = dots$newx) 
+  newx. <- seq(min(x$x), max(x$x), len = 201)
+  dots$newx <- newx.
+  dots$newy <- predict(x, newdata = newx.)
+#
   if(show.knots) {
     dots$knots <- knots(x)
     if(length(dots$knots)) {
