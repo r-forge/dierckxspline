@@ -6,7 +6,8 @@ curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3,
   penalty.opt <- function(kn, x, y, k, sigma0, eps, fixed = NULL, ...) {
     kn <- sort(c(kn, fixed))
     if(length(u <- unique(kn)) < length(kn))
-      stop(sprintf("%d coincident knot(s) detected", length(kn) - length(u)))
+      stop(sprintf("%d coincident knot(s) detected",
+                   length(kn) - length(u)))
     sp <- curfit(x, y, method = "ls", knots = kn, ...)
     p <- eps * sigma0/((sp$g + 1)^2/(diff(range(x))))
     pen <- p * sum(1/diff(unique(knots(sp, FALSE))))
@@ -26,8 +27,10 @@ curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3,
     d.sp <- numeric(g)
     for(j in seq(g)) {
       l <- j + k + 1
-      d.pen[j] <- (lambda[l + 1] - lambda[l])^(-2) - (lambda[l] - lambda[l - 1])^(-2)
-      lambda.j <- c(lambda[1:(k + j + 1)], lambda[(k + j + 1):(g + 2 * k + 2)])
+      d.pen[j] <- ((lambda[l + 1] - lambda[l])^(-2) -
+                   (lambda[l] - lambda[l - 1])^(-2) )
+      lambda.j <- c(lambda[1:(k + j + 1)],
+                    lambda[(k + j + 1):(g + 2 * k + 2)])
       e.j <- numeric(length(lambda))
       i <- (l - k):l
       e.j[i] <- (cf[i - 1] - cf[i])/(lambda.j[i + k + 1] - lambda.j[i])
@@ -56,7 +59,8 @@ curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3,
   if(!is.null(prior)) {
     g <- length(prior)
     index <- -1
-    sp0 <- curfit(x, y, method = "ls", knots = sort(c(prior, fixed)), ...)
+    sp0 <- curfit(x, y, method = "ls",
+                  knots = sort(c(prior, fixed)), ...)
     sigma0 <- deviance(sp0, TRUE)
     lambda1 <- if(length(prior) > 1) {
       optim(prior, penalty.opt, if(is.null(fixed)) penalty.gr,
@@ -95,7 +99,10 @@ curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3,
           c(lambda0[1:(l - 1)], (lambda0[l] + lambda0[l - 1])/2, lambda0[l:n])
         }
       }
-      sp0 <- curfit(x, y, method = "ls", knots = c(lambda0, fixed), ...)
+#     The following failes to pass k       
+#      sp0 <- curfit(x, y, method = "ls", knots = c(lambda0, fixed), ...)
+      sp0 <- curfit.default(x, y, w, method = "ls",
+                            knots = c(lambda0, fixed), k=k, ...)
       sigma0 <- deviance(sp0, TRUE)
       lambda1 <- if(length(lambda0) > 1) {
         optim(lambda0, penalty.opt, NULL,#if(is.null(fixed)) penalty.gr,
@@ -106,7 +113,9 @@ curfit.free.knot <- function(x, y, w = NULL, k = 3, g = 10, eps = 0.5e-3,
         optimize(penalty.opt, c(a, b), x = x, y = y, k = k,
                  sigma0 = sigma0, eps = eps, fixed = fixed)$minimum
       }
-      sp1[[i]] <- curfit(x, y, method = "ls", knots = c(lambda1, fixed), ...)
+#      sp1[[i]] <- curfit(x, y, method = "ls", knots = c(lambda1, fixed), ...)
+      sp1[[i]] <- curfit.default(x, y, w, method = "ls",
+                                 knots = c(lambda1, fixed), k=k, ...)
       r <- resid(sp1[[i]])
       sigma[i] <- deviance(sp1[[i]], TRUE)
       T[i] <- sqrt(m - 1) * sum(r[-1] * r[-m])/sum(r^2)

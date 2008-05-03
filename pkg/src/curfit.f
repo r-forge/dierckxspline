@@ -219,7 +219,7 @@ c  ..
 c  we set up the parameters tol and maxit
       maxit = 20
       tol = 0.1e-02
-c  before startig computations a data check is made. if the input data
+c  before starting computations a data check is made. if the input data
 c  are invalid, control is immediately repassed to the calling program.
       ier = 10
       if(k.le.0 .or. k.gt.5) go to 50

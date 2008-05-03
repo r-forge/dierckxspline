@@ -1,5 +1,5 @@
 \name{knots.dierckx}
-\alias{knots}
+%\alias{knots}
 \alias{knots.dierckx}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Extract the knots from a dierckx object}

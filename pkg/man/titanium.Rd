@@ -14,7 +14,7 @@ data(titanium)
   a data.frame with the following columns:   
 
   \item{x}{
-    Temperature (in unknown units
+    Temperature (in unknown units)
   }
   \item{y}{
     physical property     

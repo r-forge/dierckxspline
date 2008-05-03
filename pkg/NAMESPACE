@@ -1,9 +1,10 @@
 useDynLib(DierckxSpline)
 
 export(curfit, percur, concon, integral, insert, curfit.free.knot,
-       xyw.coords, dierckx2fd, fd2dierckx, knots,
+       xyw.coords, dierckx2fd, fd2dierckx, 
        predict.dierckx, controlPolygon, splineZeros,
        curfit.default, panel.dierckx)
+## knots ???
 ##       jupp, juppinv, jupp.prior, jupp.naive, extend.prior)
 
 importFrom(stats, coef, knots, residuals, fitted,
