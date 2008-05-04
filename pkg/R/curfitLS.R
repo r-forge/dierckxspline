@@ -199,9 +199,9 @@ curfitLS <- function(xyw, s=NULL, knots = NULL, n = NULL, from, to,
       {
         msg <- paste("ier =", val$ier, ":  ")
 #        if(val$iopt > 1 || val$iopt < -1)
-         if(val$iopt != (-1)) 
-           msg <- sprintf("Illegal option %d for a least squares spline.",
-                          val$iopt)
+        if(val$iopt != (-1)) 
+          msg <- sprintf("Illegal option %d for a least squares spline.",
+                         val$iopt)
         if(val$k < 1 || val$k > 5)
           msg <- sprintf("%s Illegal 'k' (%d).", msg, val$k)
         if(length(val$x) <= val$k)
@@ -218,7 +218,16 @@ curfitLS <- function(xyw, s=NULL, knots = NULL, n = NULL, from, to,
         msg
       }                        
                         )
-  if(val$ier > 0) stop(val$message)
+  if(val$ier > 0){
+    if(val$ier>3)
+      cat("BUG IN curfitLS:  Violation of Fortran requirements.\n",
+          "iopt =", iopt, ';  k =', k, ';m =', m, ';  n =', n,
+          ';  nest =', nest, ';  lwrk =', lwrk, ';  s =', s, 
+          '\nrange(w) =', range(w), '\n  knots =', knots,
+          '\nrange(x) =', range(x), ';  range(diff(x)) =',
+          range(diff(x)), "" ) 
+    stop(val$message)
+  }
 ##
 ## 8.  Clean up
 ##  

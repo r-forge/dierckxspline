@@ -6,7 +6,7 @@
 }
 \usage{
 curfit.free.knot(x, y, w=NULL, k = 3, g = 10, eps = 0.5e-3,
-                 prior = NULL, fixed = NULL, ...)
+                 prior = NULL, fixed = NULL, trace=1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,13 +18,12 @@ curfit.free.knot(x, y, w=NULL, k = 3, g = 10, eps = 0.5e-3,
     degree of the spline;  k=3 for cubic spline.
   }
   \item{g}{
-    integer vector of the numbers of knots to try.
+    integer vector specifying the number(s) of knots to try.  
+    
+    This is ignored if 'prior' is provided.
 
-    This is ignored and taken as length(prior) if 'prior' is provided. 
-
-    Otherwise, if(length(g) == 1) g <- seq(g).
-
-    The default is g = 1:10.  
+    If(length(g) == 1) g = 1:g.  If(length(g)>1) g = seq(min(g),
+    max(g)).  
   }
   \item{eps}{
     weight on the reciprocal differences between successive knots:
@@ -37,6 +36,15 @@ curfit.free.knot(x, y, w=NULL, k = 3, g = 10, eps = 0.5e-3,
   }
   \item{prior}{initial values for the free knots}
   \item{fixed}{locations of fixed knots}
+  \item{trace}{
+    a number indicating the trace level.  If 'g' is parsed as a vector,
+    then with trace > 0, after a model for each g[i] is fit, the
+    algorithm reports the number of knots, the variance of the
+    residuals, and the z-score for the lag 1 autocorrelation of
+    residuals. 
+
+    For g[i] > 1, 'optim' is called with control=list(trace=trace-1). 
+  }
   \item{\dots}{
     Additional arguments used by \code{curfit}.
   }
@@ -128,8 +136,9 @@ Science Publications.
 \examples{
 data(titanium)
 titan10 <- with(titanium, curfit.free.knot(x, y))
-titan10.2 <- with(titanium, curfit.free.knot(x, y, k=2))
-
+#titan10.1 <- with(titanium, curfit.free.knot(x, y, k=1))
+#titan10.1 <- with(titanium, curfit.free.knot(x, y, k=1, g=8, trace=1.1))
+#titan10.1 <- with(titanium, curfit.free.knot(x, y, k=1,g=7:8, trace=1.1))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
