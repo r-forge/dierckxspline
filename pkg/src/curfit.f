@@ -255,10 +255,10 @@ c we partition the working space and determine the spline approximation.
       ig = ib+nest*k2
       iq = ig+nest*k2
 c give ier a strange value to test fpcurf 
-      ier = 1000+ier 
+c      ier = 1000+ier 
       call fpcurf(iopt,x,y,w,m,xb,xe,k,s,nest,tol,maxit,k1,k2,n,t,c,fp,
      * wrk(ifp),wrk(iz),wrk(ia),wrk(ib),wrk(ig),wrk(iq),iwrk,ier)
-      if(ier.ne.1000)go to 50 
-      ier = -3 
+c      if(ier.ne.1000)go to 50 
+c      ier = -3 
   50  return
       end
