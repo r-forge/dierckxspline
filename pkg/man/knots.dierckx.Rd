@@ -16,7 +16,7 @@
   \item{interior}{
     logical:
 
-    if TRUE, the first Fn[["k"]]+1 of Fn[["knots"]] were dropped and the
+    if TRUE, the first Fn[["k"]]+1 of Fn[["knots"]] are dropped, and the
     next Fn[["g"]] are returned.
 
     Otherwise, the first Fn[["n"]] of Fn[["knots"]] are returned.  
