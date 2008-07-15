@@ -1,7 +1,7 @@
 useDynLib(DierckxSpline)
 
-export(curfit, percur, concon, integral, insert, curfit.free.knot,
-       xyw.coords, dierckx2fd, fd2dierckx, 
+export(curfit, percur, concon, integral.dierckx, insert,
+       curfit.free.knot, xyw.coords, dierckx2fd, fd2dierckx, 
        predict.dierckx, controlPolygon, splineZeros,
        curfit.default, panel.dierckx)
 ## knots ???
@@ -11,6 +11,7 @@ importFrom(stats, coef, knots, residuals, fitted,
            deviance, predict, deriv, profile, confint)
 importFrom(lattice, xyplot)
 #importFrom(lattice, panel)
+importFrom(PolynomF, integral) 
 
 S3method(curfit, default)
 S3method(curfit, formula)
