@@ -31,7 +31,11 @@
 Dierckx, P. (1991) \emph{Curve and Surface Fitting with Splines}, Oxford
 Science Publications.
 }
-\author{Sundar Dorai-Raj}
+\author{
+  Sundar Dorai-Raj with help from William Venables on how to eliminate a
+  conflict between the generic \code{integral} functions in the
+  \code{PolynomF} and \code{DierckxSpline} packages.  
+}
 \seealso{
   \code{\link[PolynomF]{integral}}, 
   \code{\link{curfit}},
