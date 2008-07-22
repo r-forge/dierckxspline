@@ -14,7 +14,10 @@ data(titanium)
   a data.frame with the following columns:   
 
   \item{x}{
-    Temperature (in unknown units)
+    Temperature (in unknown units.  The primary source, de Boor and Rice
+    (1968), does not say.  However, standard practice with these kinds
+    of experimens would be to record data like this in degrees Kelvin,
+    and the numbers seem consistent with that practice.)  
   }
   \item{y}{
     physical property     
@@ -28,12 +31,17 @@ data(titanium)
 }
 \details{
   Famous example used by de Boor and Rice (1968), Jupp (1978), Dierckx
-  (1993) and perhaps others.  
+  (1993) and perhaps others.  (de Boor and Rice do not mention the
+  source nor provide other information on the units or how the data were
+  collected.)  
 }
 \source{
   de Boor, C., and Rice, J. R. (1986), Least-squares cubic spline
   approximation.  II:  variable knots.  \emph{Report CSD TR 21},
-  Purdue U., Lafayette, IN.
+  Purdue U., Lafayette, IN.  (available from http://
+  citeseer.ist.psu.edu/cache/papers/cs/24666/
+  ftp:zSzzSzftp.cs.wisc.eduzSzApproxzSztr21.pdf/
+  deboor68least.pdf;  accessed 2008.07.22) 
   
   Dierckx, Paul (1993), \emph{Curve and Surface Fitting with Splines},
   Springer.
