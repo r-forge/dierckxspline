@@ -3,7 +3,7 @@ useDynLib(DierckxSpline)
 export(curfit, percur, concon, integral.dierckx, insert,
        curfit.free.knot, xyw.coords, dierckx2fd, fd2dierckx, 
        predict.dierckx, controlPolygon, splineZeros,
-       curfit.default, panel.dierckx)
+       curfit.default, panel.dierckx, as.dierckx)
 ## knots ???
 ##       jupp, juppinv, jupp.prior, jupp.naive, extend.prior)
 
@@ -13,6 +13,7 @@ importFrom(lattice, xyplot)
 #importFrom(lattice, panel)
 importFrom(PolynomF, integral) 
 
+S3method(as.dierckx, fd) 
 S3method(curfit, default)
 S3method(curfit, formula)
 S3method(concon, default)
