@@ -29,7 +29,7 @@
   \item{\dots}{
     Currently ignored.
 
-    Additional arguments used only in code{update.curfit}. Otherwise,
+    Additional arguments used only in \code{update.curfit}. Otherwise,
     ignored.
   }
 }

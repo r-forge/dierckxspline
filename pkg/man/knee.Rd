@@ -13,11 +13,9 @@ data(knee)
 \format{
   a data.frame with the following columns:
 
-  \item{percent}{
-    percent of the cycle
-  }
-  \item{degree}{
-    Knee flexion in degrees.
+  \itemize{
+    \item{percent}{percent of the cycle}
+    \item{degree}{Knee flexion in degrees.}
   }
 }
 \details{
