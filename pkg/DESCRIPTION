@@ -11,7 +11,7 @@ Description:
   http://www.netlib.org/dierckx
   2012.02.15:  This package is broken.
   Currently, it seems NOT to have any users and is not worth fixing.
-  Thes FITPACK routines are over 20 years old and may be obsolete.
+  These FITPACK routines are over 20 years old and may be obsolete.
   If you want to fix it, I will happily make you the maintainer.
   Spencer Graves
 License: GPL (>= 2)
