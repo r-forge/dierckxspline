@@ -15,6 +15,6 @@ Description:
   If you want to fix it, I'm happy to make you the maintainer.
   Spencer Graves
 License: GPL (>= 2)
-Depends: R (>= 2.4.0), stats, lattice, PolynomF
-Suggests: fda, splines
+Depends: R (>= 2.4.0), stats, lattice, PolynomF, fda
+Suggests: splines
 Packaged: Tue Aug 28 06:13:43 2007; spencerg
