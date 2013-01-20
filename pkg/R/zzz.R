@@ -1,3 +1,4 @@
-.First.lib <- function(libname, pkgname) {
-  library.dynam(pkgname, pkgname)
+.onLoad <- function(libname, pkgname) {
+#  LibLoc <- system.file(pkgnam)
+  library.dynam(pkgname, pkgname, NULL)
 }
